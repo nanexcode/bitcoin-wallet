@@ -1,9 +1,10 @@
 from textual.app import ComposeResult
-from textual.widgets import Static, TabPane, Label, TabbedContent
+from textual.widgets import Static, TabPane, TabbedContent
 from .overview import Overview
 from .receive import Receive
 from .send import Send
 from .transactions import Transactions
+
 
 class Dashboard(Static):
     """

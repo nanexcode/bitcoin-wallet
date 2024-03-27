@@ -1,40 +1,47 @@
 from textual.app import ComposeResult
-from textual.widgets import Static, Label, Tab
-from textual.containers import Vertical, Horizontal
+from textual.widgets import Static, Label
+from textual.containers import Vertical, Container, Center
+from textual.widgets import DataTable
+from rich.table import Table
 
+class TransactionDetails:
 
-class TransactionDetails(Static):
+    def create_panel(self) -> Table:
+        transactions_table = Table(title="Transactions")
 
-    DEFAULT_CSS = """
-    LabelledInput {
-        align: center middle;
-    }
-    """
+        columns = ("Type", "Date", "Hash", "Amount", "Confirmations", "Link")
+        transactions_table.add_column("Type")
+        transactions_table.add_column("Date")
+        transactions_table.add_column("Hash")
+        transactions_table.add_column("Amount", style="green")
+        transactions_table.add_column("Confirmations")
+        transactions_table.add_column("Link")
 
-    def compose(self) -> ComposeResult:
-        yield Vertical(
-            Horizontal(
-                Label("6/13/21"),
-                Label("+1.23456768 BTC")
-            ),
-            Horizontal(
-                Label("5/8/2022"),
-                Label("-0.98750000 BTC")
-            ),
-            Horizontal(
-                Label("4/19/2023"),
-                Label("+1.23456768 BTC")
-            )
-        )
+        transactions_table.add_row("Incoming", "01/02/2021", "86371ccb33282ffd780b85e3617753b948dabd4fa19a2692f3ac1217c184b000", "1.09887653", "1", "")
+        transactions_table.add_row("Incoming", "01/02/2021", "7b07297f16bc71c2e2f80ab7dd0e9a99fe8ab54c5a3683d0c582b0dd6a155842", "1.09887652", "1", "")
+        transactions_table.add_row("Incoming", "01/02/2021", "86371ccb33282ffd780b85e3617753b948dabd4fa19a2692f3ac1217c184b000", "1.09887651", "1", "")
+        transactions_table.add_row("Incoming", "01/02/2021", "7b07297f16bc71c2e2f80ab7dd0e9a99fe8ab54c5a3683d0c582b0dd6a155842", "1.09887650", "1", "")
+        transactions_table.add_row("Incoming", "01/02/2021", "86371ccb33282ffd780b85e3617753b948dabd4fa19a2692f3ac1217c184b000", "1.44553905", "1", "")
+        transactions_table.add_row("Incoming", "01/02/2021", "7b07297f16bc71c2e2f80ab7dd0e9a99fe8ab54c5a3683d0c582b0dd6a155842", "1.09887654", "1", "")
+        transactions_table.add_row("Incoming", "01/02/2021", "86371ccb33282ffd780b85e3617753b948dabd4fa19a2692f3ac1217c184b000", "1.09887655", "1", "")
+        transactions_table.add_row("Outgoing", "01/02/2021", "86371ccb33282ffd780b85e3617753b948dabd4fa19a2692f3ac1217c184b000", "1.09887656", "1", "")
+
+        return transactions_table
 
 
 class RecentTransactions(Static):
 
+    def __init__(self):
+        super().__init__()
+        self.data_table_provider = TransactionDetails()
+
     def compose(self) -> ComposeResult:
-        yield Vertical(
-            Label("Recent Transactions"),
-            TransactionDetails(),
-            TransactionDetails(),
-            TransactionDetails(),
-            TransactionDetails()
+        yield Container(
+            Center(
+                Static(id="transactions-table")
+            )
         )
+
+    def on_mount(self) -> None:
+        transactions = self.query_one("#transactions-table")
+        transactions.update(self.data_table_provider.create_panel())
