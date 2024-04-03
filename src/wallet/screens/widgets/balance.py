@@ -1,12 +1,22 @@
 from textual.app import ComposeResult
-from textual.widgets import Static
-from textual.containers import Container, Center
+from textual.widgets import Static, Button
+from textual.containers import Container, Center, Horizontal
 from rich.table import Table
 from rich.style import Style
-from services import WalletService, Balance
+from services import WalletService
 
 
 class Balance(Static):
+    DEFAULT_CSS = """
+        Balance {
+            align: center middle;
+            width: 100%
+        }
+
+        #buttons-send-receive {
+            align: center middle;
+        }
+    """
 
     def __init__(self):
         super().__init__()
@@ -21,6 +31,13 @@ class Balance(Static):
         yield Container(
             Center(
                 Static(id="balance-table")
+            ),
+            Center(
+                Horizontal(
+                    Button("Send", variant="warning"),
+                    Button("Receive", variant="success"),
+                    id="buttons-send-receive"
+                )
             )
         )
 
@@ -32,7 +49,6 @@ class Balance(Static):
         balance = self.wallet_service.get_balance()
         table_title_style = Style(color="#bbc8e8", bold=True)
         table_information = Table(show_header=False,
-                                  box=None,
                                   title="Balance Information",
                                   title_style=table_title_style)
 

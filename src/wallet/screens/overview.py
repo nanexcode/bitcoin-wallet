@@ -14,7 +14,6 @@ class Overview(Static):
         grid-size: 2 1;
         padding: 0 1;
         border: thick $background 80%;
-
     }
     """
 

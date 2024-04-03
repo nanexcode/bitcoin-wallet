@@ -3,8 +3,7 @@ import os
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from screens.modals import HelpScreen, WelcomeModal
-from screens.dashboard import Dashboard
-from screens.widgets import CurrentPrice
+from screens import MainScreen
 from screens.widgets import TopBar
 from rich.theme import Theme
 
@@ -13,7 +12,7 @@ class Wallet(App):
     """A class representing a trading application."""
 
     TITLE = "Bitcoin Wallet"
-    CSS_PATH = "wallet.css"
+    #CSS_PATH = "wallet.css"
 
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
@@ -44,14 +43,13 @@ class Wallet(App):
                 "table_border": "#333f62",
             }
         )
-        self.console.push_theme(theme)
+        #self.console.push_theme(theme)
         self.console.set_window_title(self.TITLE)
 
     def compose(self) -> ComposeResult:
         """Create the app layout and widgets."""
         yield TopBar(app_version="0.0.1 alpha")
-        yield CurrentPrice()
-        yield Dashboard()
+        yield MainScreen()
 
     def on_mount(self) -> None:
         self.push_screen(WelcomeModal())

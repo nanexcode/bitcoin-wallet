@@ -1,5 +1,6 @@
 from bitcoinlib.wallets import Wallet, WalletError
 from .blockchain_info_client import BlockchainInfoClient
+from datetime import datetime
 
 SATOSHI = 100_000_000
 
@@ -19,7 +20,7 @@ class Balance(object):
 
 class Transaction(object):
     tx_id = ""
-    confirmation = 0
+    confirmations = 0
     time = 0
     value = 0.0
 
@@ -49,12 +50,43 @@ class WalletService:
 
     def get_balance(self) -> Balance:
         response = self.blockchain.get_address_details(self.get_address())
+
+        final_balance = response["chain_stats"]['funded_txo_sum'] - response["chain_stats"]['spent_txo_sum']
+
         if "error" in response:
             return Balance(0, 0, 0, 0)
         else:
             return Balance(
-                response['total_received'] / SATOSHI,
-                response['total_sent'] / SATOSHI,
-                response['total_received'] / SATOSHI,
-                response['n_tx'],
+                response["chain_stats"]['funded_txo_sum'] / SATOSHI,
+                response["chain_stats"]['spent_txo_sum'] / SATOSHI,
+                final_balance / SATOSHI,
+                response["chain_stats"]['tx_count'],
             )
+
+    def get_transactions(self) -> [Transaction]:
+        """
+        Returns all the transactions for the current address
+        """
+        block_height = self.blockchain.get_latest_block_height()
+        txs = self.blockchain.get_transactions(self.get_address())
+        transactions = []
+        for transaction in txs:
+            value = 0
+            confirmations = 0
+            for output in transaction["vout"]:
+                value = value + output["value"]
+
+            if transaction["status"]["confirmed"]:
+                confirmations = block_height - transaction["status"]["block_height"] + 1
+
+            transactions.append(Transaction(
+                transaction["txid"],
+                confirmations,
+                "",
+                str(value / SATOSHI)
+            ))
+
+            if len(transactions) == 20:
+                break
+
+        return transactions

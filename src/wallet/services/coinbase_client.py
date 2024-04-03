@@ -1,4 +1,7 @@
+from datetime import date
+from dateutil import relativedelta
 import requests
+import yfinance as yf
 
 
 class CoinbaseClient:
@@ -31,7 +34,20 @@ class CoinbaseClient:
         for product in data:
             print(product['id'])
 
+    def get_historical_price(self):
+        """
+        Returns historical data from yfinance api.
+        Thr response has the following data
+
+        Date Open High Low Close ... Volume
+        """
+
+        today = date.today()
+        month = today - relativedelta.relativedelta(months=1)
+        data = yf.download('BTC-USD', start=month, end=today)
+        return data
+
 
 if __name__ == '__main__':
     service = CoinbaseClient()
-    print("Bitcoin price " + str(service.get_bitcoin_price()))
+    print(service.get_historical_price())
