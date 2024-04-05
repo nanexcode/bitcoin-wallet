@@ -3,8 +3,11 @@ import requests
 
 class BlockchainInfoClient:
 
-    def __init__(self):
-        self.url = "https://mempool.space/api"
+    def __init__(self, testnet: bool = False):
+        if not testnet:
+            self.url = "https://mempool.space/api"
+        else:
+            self.url = "https://mempool.space/testnet/api"
 
     def get_latest_block_height(self) -> int:
         endpoint = self.url + "/blocks/tip/height"
@@ -33,10 +36,7 @@ class BlockchainInfoClient:
 
 
 if __name__ == '__main__':
-    app = BlockchainInfoClient()
-    result = app.get_latest_block_height()
-    print(result + 1)
-    #print(app.get_latest_block_info())
-    #print(app.get_address_details("bc1q7cyrfmck2ffu2ud3rn5l5a8yv6f0chkp0zpemf"))
-    print(app.get_transactions("bc1q7cyrfmck2ffu2ud3rn5l5a8yv6f0chkp0zpemf"))
+    app = BlockchainInfoClient(testnet=True)
+    print(app.get_transactions("tb1qvr3m0d0f6hte7xjex7qufg7s2p4dh534sezqnp"))
+
 

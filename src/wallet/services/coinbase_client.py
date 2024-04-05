@@ -43,11 +43,12 @@ class CoinbaseClient:
         """
 
         today = date.today()
-        month = today - relativedelta.relativedelta(months=1)
-        data = yf.download('BTC-USD', start=month, end=today)
-        return data
+        yesterday = today - relativedelta.relativedelta(days=1)
+
+        return yf.download('BTC-USD', interval="15m", period="1d")
 
 
 if __name__ == '__main__':
     service = CoinbaseClient()
-    print(service.get_historical_price())
+    data = service.get_historical_price()
+    print(data)

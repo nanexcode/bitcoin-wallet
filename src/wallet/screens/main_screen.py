@@ -20,18 +20,18 @@ class MainScreen(Static):
     }
     
     Balance {
-        border: panel
+        border: double #a5b8e7;
     }
     
     RecentTransactions {
         column-span: 2;
         width: 100%;
-        border: panel
+        border: double #a5b8e7;
     }
     """
 
     def compose(self) -> ComposeResult:
-        yield Graph()
+        #yield Graph()
         yield Balance()
         yield RecentTransactions()
 

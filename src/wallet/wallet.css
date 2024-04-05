@@ -38,12 +38,12 @@ LoadingIndicator {
     height: auto;
     content-align: center middle;
 }
-ModalScreen {
-    background: #0d1015 70%;
-    align: center middle;
-    height: 40;
-    color: #4d5a85;
-}
+/*ModalScreen {*/
+/*    background: #0d1015 70%;*/
+/*    align: center middle;*/
+/*    height: 40;*/
+/*    color: #4d5a85;*/
+/*}*/
 
 Sparkline {
     margin-top: 1;
@@ -95,143 +95,6 @@ TopBar {
     height: 11;
     width: auto;
 }
-
-.innodb_trx_locks {
-    height: auto;
-    background: #0f1525;
-    border: tall #1b233a;
-    margin-bottom: 1;
-}
-.innodb_trx_locks > Label {
-    width: 100%;
-    text-style: bold;
-    color: #bbc8e8;
-    content-align: center middle;
-    margin-bottom: 1;
-}
-
-.metadata_locks {
-    height: auto;
-    background: #0f1525;
-    border: tall #1b233a;
-    margin-bottom: 1;
-}
-.metadata_locks > Label {
-    width: 100%;
-    text-style: bold;
-    color: #bbc8e8;
-    content-align: center middle;
-    margin-bottom: 1;
-}
-
-.processlist {
-    height: auto;
-    background: #0f1525;
-    border: tall #1b233a;
-}
-.processlist > Label {
-    width: 100%;
-    color: #bbc8e8;
-    text-style: bold;
-    content-align: center middle;
-    margin-bottom: 1;
-}
-
-
-.replication {
-    height: auto;
-    width: auto;
-    margin-bottom: 1;
-}
-.replication > Label {
-    width: 100%;
-    content-align: center middle;
-}
-.replication > Center {
-    layout: horizontal;
-    width: auto;
-    content-align: center middle;
-}
-.replication > Center > ScrollableContainer {
-    content-align: center top;
-    background: #0f1525;
-    border: tall #1b233a;
-    height: auto;
-    max-height: 18;
-}
-.replication > Center > ScrollableContainer > Static {
-    width: auto;
-}
-.replication > Center > .replication_status {
-    max-width: 85;
-}
-.replication > Center > .replication_thread_applier {
-    max-width: 60;
-}
-
-.replicas {
-    height: auto;
-    margin-bottom: 1;
-}
-.replicas > Container {
-    height: auto;
-    layout: grid;
-    grid-size: 2;
-    grid-gutter: 1 0;
-}
-.replicas > Container > ScrollableContainer  {
-    background: #0f1525;
-    border: tall #1b233a;
-    height: auto;
-    max-height: 18;
-}
-.replicas > Label {
-    width: 100%;
-    content-align: center middle;
-}
-
-.group_replication {
-    height: auto;
-    margin-bottom: 1;
-}
-.group_replication > Container {
-    height: auto;
-    layout: grid;
-    grid-size: 3;
-    grid-gutter: 1 0;
-}
-.group_replication > Container > ScrollableContainer  {
-    background: #0f1525;
-    border: tall #1b233a;
-    height: auto;
-    max-height: 18;
-}
-.group_replication > Label {
-    width: 100%;
-    content-align: center middle;
-}
-
-.ddl {
-    height: auto;
-    background: #0f1525;
-    border: tall #1b233a;
-    margin-bottom: 1;
-}
-.ddl > Container {
-    height: auto;
-    width: auto;
-}
-.ddl > Label {
-    width: 100%;
-    color: #bbc8e8;
-    text-style: bold;
-    content-align: center middle;
-}
-
-.pad_bottom_1 {
-    padding-bottom: 1;
-}
-
 
 TabPane {
     padding: 0;
@@ -315,40 +178,6 @@ Sparkline > .sparkline--min-color {
 }
 .top_pad_1 {
     padding-top: 1;
-}
-
-
-Button.-primary {
-    background: #192c5b;
-    border-top: tall #425894;
-    border-bottom: tall #151b2b;
-}
-Button.-primary:hover {
-    background: #203875;
-    border-top: tall #4a62a4;
-    border-bottom: tall #151b2b;
-}
-Button.-primary:focus {
-    background: #203875;
-    border-top: tall #4a62a4;
-    border-bottom: tall #151b2b;
-    text-style: bold;
-}
-Button {
-    background: #282c42;
-    border-top: tall #54597b;
-    border-bottom: tall #171922;
-}
-Button:hover {
-    background: #383e5c;
-    border-top: tall #69709a;
-    border-bottom: tall #171922;
-}
-Button:focus {
-    background: #383e5c;
-    border-top: tall #69709a;
-    border-bottom: tall #171922;
-    text-style: bold;
 }
 
 Switch {

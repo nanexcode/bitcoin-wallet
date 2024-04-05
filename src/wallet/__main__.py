@@ -12,7 +12,7 @@ class Wallet(App):
     """A class representing a trading application."""
 
     TITLE = "Bitcoin Wallet"
-    #CSS_PATH = "wallet.css"
+    CSS_PATH = "wallet.css"
 
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
